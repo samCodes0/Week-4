@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <!-- box for user to type something in, defaults to text entry -->
+    <label for="new-text">Enter your text</label>
+    <input id="new-text" />
+
+    <!-- An empty list here, contents will created with JavaScript -->
+    <!-- Based on data the user enters -->
+    <ul id="list-of-text"></ul>
+    <button id="add-new-text">Add text to list</button>
+
+    <button id="clear-all-list">Clear all list items</button>
+
+    <script>
+      let addNewTextButton = document.querySelector("#add-new-text");
+      let newTextInput = document.querySelector("#new-text");
+      let listOfTextElement = document.querySelector("#list-of-text");
+      let clearAllListButton = document.querySelector("#clear-all-list");
+
+      // could also use document.querySelectorAll and find all the li items, count how many there are
+      let numberOfItemsInList = 0; // global variable
+
+      clearAllListButton.addEventListener("click", function () {
+        listOfTextElement.innerHTML = "";
+
+        numberOfItemsInList = 0;
+      });
+
+      addNewTextButton.addEventListener("click", function () {
+        // first check if we have too many items
+        if (numberOfItemsInList >= 10) {
+          alert("That is too many things.");
+          return;
+        }
+
+        let newTextEntered = newTextInput.value;
+
+        // check the length of the new text entered
+        if (newTextEntered.length > 50) {
+          alert("That text is too long");
+          return;
+        }
+
+        // check if we entered any text at all
+        if (!newTextEntered.length) {
+          return;
+        }
+
+        let newLiElement = document.createElement("li");
+        newLiElement.innerHTML = newTextEntered;
+        listOfTextElement.appendChild(newLiElement);
+
+        newTextInput.value = "";
+
+        numberOfItemsInList++;
+      });
+    </script>
+  </body>
+</html>

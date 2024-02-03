@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mouse Test</title>
+  </head>
+  <body>
+    <p id="mouse-me">Your mouse is not on this message</p>
+
+    <script>
+      let mouseCount = 0;
+      let message = document.querySelector("#mouse-me");
+
+      message.addEventListener("mouseover", () => {
+        mouseCount++;
+        if (mouseCount == 1) {
+          message.innerHTML = "Mouse has been here: " + mouseCount + " time";
+        } else {
+          // modifying the message here to display times instead of time
+          // for more than 1 mouseCount
+          message.innerHTML =
+            "Your mouse has been here: " + mouseCount + " times";
+        }
+      });
+
+      message.addEventListener("mouseout", () => {
+        message.innerHTML = "Your mouse is not on this message";
+      });
+    </script>
+  </body>
+</html>

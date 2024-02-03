@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz Game</title>
+  </head>
+  <body>
+    <p>What is the capital of wisconsin?</p>
+
+    <button class="wrong-answer">Bayfield</button>
+    <button id="correct-answer">Madison</button>
+    <button class="wrong-answer">Milwaukee</button>
+
+    <p id="result"></p>
+
+    <script>
+      let correctAnswerButton = document.querySelector("#correct-answer");
+      let wrongAnswerButtons = document.querySelectorAll(".wrong-answer");
+
+      let defaultButtonColor = correctAnswerButton.style.background;
+      let result = document.querySelector("#result");
+
+      // using forEach to add eventListeners to both of the wrong-answer buttons
+      // for each allows you to define a function to run for each object in a list
+      wrongAnswerButtons.forEach((wrongAnswerButton) => {
+        // console.log(wrongAnswerButton);
+        wrongAnswerButton.addEventListener("click", () => {
+          result.innerHTML = "Wrong answer, try again?";
+          correctAnswerButton.style.background = defaultButtonColor;
+        });
+      });
+
+      // adding an eventListener to the one correct-answer button
+      correctAnswerButton.addEventListener("click", () => {
+        result.innerHTML = "Correct Answer";
+        correctAnswerButton.style.background = "cyan";
+      });
+    </script>
+  </body>
+</html>

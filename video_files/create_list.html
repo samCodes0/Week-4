@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create List prototype</title>
+  </head>
+  <body>
+    <p>Enter some text to add to the list</p>
+    <input type="text" id="new-text" />
+    <button id="add-button">Add</button>
+    <button id="clear-button">Clear</button>
+
+    <ul id="list-of-text"></ul>
+
+    <script>
+      let textInput = document.querySelector("#new-text");
+      let addButton = document.querySelector("#add-button");
+      let clearButton = document.querySelector("#clear-button");
+      let textList = document.querySelector("#list-of-text");
+
+      // function to add the value of the textInput to the list
+      // does nothing if the user typed nothing into the textInput
+      // displays an elert and does nothing if the user tries to add more than 10 items to the list.
+      let addToList = () => {
+        let inputText = textInput.value;
+        if (!inputText.length) return;
+        else if (textList.childElementCount >= 10) {
+          alert("Cant add more than 10 items to the list!");
+          textInput.value = "";
+          return;
+        }
+
+        // This is how we create a new element using JavaScript.
+        // Pass the name of the element you want to create into the arguments of the createElement method.
+        let newListItem = document.createElement("li");
+        newListItem.innerHTML = inputText;
+        textList.appendChild(newListItem);
+        textInput.value = "";
+      };
+
+      document.addEventListener("keyup", (event) => {
+        // here we are checking if the user pressed enter by checking keyCode 13
+        if (event.keyCode == 13) addToList();
+      });
+
+      addButton.addEventListener("click", () => {
+        addToList();
+      });
+
+      clearButton.addEventListener("click", () => {
+        // clearing the list
+        textList.innerHTML = "";
+      });
+    </script>
+  </body>
+</html>
